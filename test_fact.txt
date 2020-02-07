@@ -1,0 +1,20 @@
+#Factorial Test
+#load in X0
+ADDI X0, XZR, #5
+ADD X30, XZR, SP
+fact: SUBI SP, SP, #16
+STUR X30, [SP, #8]
+STUR X0, [SP, #0]
+SUBIS XZR, X0, #1
+B.GE L1
+ADDI X1, XZR, #1
+ADDI SP, SP, #16
+BR X30
+L1: SUBI X0, X0, #1
+BL fact
+LDUR X0, [SP, #0]
+LDUR X30, [SP, #8]
+ADDI SP, SP, #16
+MUL X1, X0, X1
+BR X30
+.data[000000FF]

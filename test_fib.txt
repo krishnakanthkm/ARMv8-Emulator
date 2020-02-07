@@ -1,0 +1,27 @@
+#Fibonacci Test
+#load input
+ADDI X0, XZR, #10
+#load SP into X30
+ADD X30, XZR, SP
+#start
+ADDI X9, X0, #1
+LSL X9, X9, #3
+SUB SP, SP, X9
+ADDI X10, XZR, #2
+STUR XZR, [SP, #0]
+ADDI X11, XZR, #1
+STUR X11, [SP, #8]
+ForLoop: SUBS XZR, X10, X0
+B.GT EndForLoop
+SUBI X12, X10, #2
+LSL X12, X12, #3
+ADD X12, SP, X12
+LDUR X13, [X12, #0]
+LDUR X14, [X12, #8]
+ADD X14, X13, X14
+STUR X14, [X12, #16]
+ADDI X10, X10, #1
+B ForLoop
+EndForLoop: ADD SP, SP, X9
+BR X30
+.data[000000FF]
